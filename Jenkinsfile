@@ -78,6 +78,7 @@ pipeline{
             steps{
                 withAWS(credentials: 'aws-key', region: 'us-east-1') {
                 script{
+                  dir('Kubernetes'){     
                     withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
                     sh 'kubectl apply -f deployment.yml'
                     sh 'kubectl apply -f service.yml'
@@ -85,6 +86,7 @@ pipeline{
                 }
             }   
         }
+    }
     }
     }
     post {
