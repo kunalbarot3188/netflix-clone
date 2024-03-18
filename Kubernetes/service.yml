@@ -12,3 +12,4 @@ spec:
     nodePort: 30007
   selector:
     app: netflix-app
+  type: LoadBalancer # changed from NodePort  
