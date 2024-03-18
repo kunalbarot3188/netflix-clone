@@ -84,14 +84,12 @@ pipeline{
         }
     }
     post {
-     always {
-        emailext attachLog: true,
-            subject: "'${currentBuild.result}'",
-            body: "Project: ${env.JOB_NAME}<br/>" +
-                "Build Number: ${env.BUILD_NUMBER}<br/>" +
-                "URL: ${env.BUILD_URL}<br/>",
-            to:'kunalshah3188@gmail.com',
-            attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
-        }
+    always {
+        echo 'Slack Notifications'
+        slackSend (
+            channel: '#netflix-clone-app', 
+            color: COLOR_MAP[currentBuild.currentResult],
+            message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+        )
     }
 }
