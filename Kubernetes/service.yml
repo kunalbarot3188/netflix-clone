@@ -5,11 +5,21 @@ metadata:
   labels:
     app: netflix-app
 spec:
-  type: NodePort
-  ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30007
   selector:
     app: netflix-app
-  type: LoadBalancer # changed from NodePort  
+  ports:
+    - protocol: TCP
+      port: 80  # You can use port 80 here for HTTP traffic
+      targetPort: 80  # This should match the port your Node.js application is running on (3000)
+  type: LoadBalancer # changed from NodePort
+
+
+# spec:
+#   type: NodePort
+#   ports:
+#   - port: 80
+#     targetPort: 80
+#     nodePort: 30007
+#   selector:
+#     app: netflix-app
+#   type: LoadBalancer # changed from NodePort  
